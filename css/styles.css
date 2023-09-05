@@ -1,0 +1,31 @@
+* {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+#head,
+#footer {
+  background-color: brown;
+  font-size: xx-large;
+  height: 70px;
+  color: aliceblue;
+
+  /* font-style: ; */
+}
+
+#left_aside {
+}
+
+#main {
+  margin-top: 30px;
+  margin-left: 50px;
+  background-color: orange;
+  font-size: xx-large;
+  /* font-style: ; */
+}
+
+#footer {
+  margin-top: 50px;
+  /* font-style: ; */
+}
