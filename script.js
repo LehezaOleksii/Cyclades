@@ -1,79 +1,49 @@
 const max_players = 5;
+const max_index = 3;
 var active_playres = 4;
 var max = 6;
 
 function shuffle_gods() {
-  let gods_list = get_list_gods();
-  let gods_numbers = get_values(gods_list);
-  let shuffled_list = shuffle(gods_numbers);
-
-  display_new_values(shuffled_list);
+  let gods_images = get_list_gods();
+  shuffle(gods_images);
 }
 
 function get_list_gods() {
   return document
     .getElementById("Gods_order")
-    .getElementsByTagName("li")
-    .getAttribute("src");
+    .getElementsByClassName("swapable-img");
 }
 
 function shuffle(gods_list) {
-  const max_index = 3;
   let currentIndex = 0;
   let randomIndex;
   swipe_number = max_players - active_playres;
 
-
-  
   if (swipe_number > 0) {
     currentIndex += swipe_number;
     let swipe_god_index = 0;
     let hidden_god_index = max_index;
     while (swipe_number > 0) {
-      [gods_list[hidden_god_index], gods_list[swipe_god_index]] = [
-        gods_list[swipe_god_index],
-        gods_list[hidden_god_index],
-      ];
+      var tempSrc = gods_list[hidden_god_index].src;
+      gods_list[hidden_god_index].src = gods_list[swipe_god_index].src;
+      gods_list[swipe_god_index].src = tempSrc;
       swipe_god_index++;
       hidden_god_index--;
       swipe_number--;
     }
   }
   let before_shuffle_currentIndex = currentIndex;
-  for (var i = 0; i < 100; i++) {
+  for (var i = 0; i < 500; i++) {
     currentIndex = before_shuffle_currentIndex;
     while (currentIndex < max_index) {
       randomIndex = getRandomInt(currentIndex, max_index + 1);
-
-      [gods_list[currentIndex], gods_list[randomIndex]] = [
-        gods_list[randomIndex],
-        gods_list[currentIndex],
-      ];
-
+      var tempSrc = gods_list[currentIndex].src;
+      gods_list[currentIndex].src = gods_list[randomIndex].src;
+      gods_list[randomIndex].src = tempSrc;
       currentIndex++;
     }
   }
   return gods_list;
-}
-
-function get_values(Elements) {
-  let values = [];
-  for (var i = 0; i < Elements.length; i++) {
-    let value = Elements[i].textContent;
-    values.push(value);
-  }
-  return values;
-}
-
-function display_new_values(shuffled_gods) {
-  var elements = document
-    .getElementById("Gods_order")
-    .getElementsByTagName("li")
-    .getAttribute("src");
-
-  for (var i = 0; i < elements.length; i++) {
-    elements[i].textContent = shuffled_gods[i];
-  }
 }
 
 function getRandomInt(min, max) {
@@ -93,18 +63,3 @@ function getRandomInt(min, max) {
   }
   return Math.floor(num);
 }
-
-// function get_list_gods() {
-//   return document.getElementById("Gods_order").getElementsByTagName("li");
-//   //   for (let i = 0; i <= list.length - 1; i++) {
-//   //     console.log(list[i]);
-//   //   }
-// }
-// function stir(gods_list) {
-
-// }
-
-// function stir_gods() {
-//   let gods_list = get_list_gods();
-//   stir(gods_list);
-// }

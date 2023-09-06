@@ -8,23 +8,53 @@
     <script src="script.js"></script>
   </head>
   <body>
-    <div id="head">Кіклади</div>
+    <div id="head">
+      <img src="images/head_border.png" width="100%" alt="" />
+    </div>
     <div id="main">
       <ul id="Gods_order">
-        <img src="images/gods.hidden.png" />
-        <li><img src="images/ares.png" alt="ares" /> ares</li>
-        <img src="images/gods.hidden.png" />
-        <li><img src="images/peseidon.png" alt="peseidon" />peseidon</li>
-        <img src="images/gods.hidden.png" />
-        <li><img src="images/aphina.png" alt="aphina" />aphina</li>
-        <img src="images/gods.hidden.png" />
-        <li><img src="images/zeus.png" alt="zeus" />zeus</li>
+        <li>
+          <img
+            class="swapable-img img_card"
+            src="images/ares.png"
+            alt="ares"
+          /><br />
+        </li>
+        <li>
+          <img
+            class="swapable-img img_card"
+            src="images/poseidon.png"
+            alt="peseidon"
+          /><br />
+        </li>
+        <li>
+          <img
+            class="swapable-img img_card"
+            src="images/aphina.png"
+            alt="aphina"
+          /><br />
+        </li>
+        <li>
+          <div>
+            <img class="hidden_image img_card" src="images/gods.hidden.png" />
+
+            <img
+              class="swapable-img img_card"
+              src="images/zeus.png"
+              alt="zeus"
+            /><br />
+          </div>
+        </li>
+        <img class="img_card" id = "apollon" src="images/apollon.png" alt="apollon" />
       </ul>
       <p>
-        <input type="button" value="Перетасувати" onclick="shuffle_gods();" />
+        <button class="img_card button" onclick="shuffle_gods();">
+          Розмішати
+        </button>
       </p>
     </div>
-    <div id="footer"></div>
-    <button id="Gods_order_button">Change Gods order</button>
+    <div id="footer">
+      <img src="images/bottom_border.png" width="100%" alt="" />
+    </div>
   </body>
 </html>
