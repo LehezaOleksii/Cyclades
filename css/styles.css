@@ -14,10 +14,11 @@ button {
 
 #head,
 #footer {
-  background-color: rgb(35, 31, 32);
+  background-color: rgb(240, 240, 240);
   font-size: xx-large;
   height: 70px;
   color: aliceblue;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.4);
 }
 
 #main {
@@ -26,9 +27,13 @@ button {
 }
 
 .img_card {
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+
   width: 25%;
 }
-
+.img_card:hover {
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
 .hidden_image {
   position: absolute;
 }
@@ -40,13 +45,39 @@ button {
   border-radius: 6px;
   background: #fa9746;
   font-size: x-large;
-font-family:Georgia, 'Times New Roman', Times, serif;
+  font-family: Georgia, "Times New Roman", Times, serif;
   color: white;
 }
 
-#apollon{
+#apollon {
   margin-top: 5px;
 }
 #footer {
   margin-top: 50px;
+}
+
+@media screen and (max-width: 500px) {
+  .img_card {
+    width: 80%;
+  }
+  .button {
+    width: 70%;
+  }
+
+  #apollon {
+    margin-top: 10px;
+  }
+}
+
+@media screen and (max-width: 900px) and (max-height: 500px) {
+  .img_card {
+    width: 80%;
+  }
+  .button {
+    width: 70%;
+  }
+
+  #apollon {
+    margin-top: 10px;
+  }
 }
