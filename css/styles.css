@@ -22,13 +22,34 @@ button {
 }
 
 #main {
-  margin-top: 30px;
-  margin-left: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+#main li {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  margin-top: 10px;
+}
+
+#main li div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+#gods_order {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 10px;
 }
 
 .img_card {
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
-
   width: 25%;
 }
 .img_card:hover {
@@ -50,7 +71,7 @@ button {
 }
 
 #apollon {
-  margin-top: 5px;
+  margin-top: 30px;
 }
 #footer {
   margin-top: 50px;
@@ -58,7 +79,7 @@ button {
 
 @media screen and (max-width: 500px) {
   .img_card {
-    width: 80%;
+    width: 85%;
   }
   .button {
     width: 70%;
@@ -66,6 +87,13 @@ button {
 
   #apollon {
     margin-top: 10px;
+  }
+  #main {
+    margin-top: 0;
+    margin-left: 0;
+  }
+  .img_card {
+    width: 90%;
   }
 }
 
@@ -75,6 +103,11 @@ button {
   }
   .button {
     width: 70%;
+  }
+
+  #main {
+    margin-top: 0;
+    margin-left: 0;
   }
 
   #apollon {
