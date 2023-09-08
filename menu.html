@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cyclades randomizer</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <script src="script.js"></script>
+  </head>
+  <body>
+    <div id="head">
+      <img id="head" src="images/head_border.png" width="100%" alt="" />
+    </div>
+    <div id="main">
+      <ul id="Gods_order">
+        <li>
+          <img
+            class="swapable-img img_card"
+            src="images/ares.png"
+            alt="ares"
+          /><br />
+        </li>
+        <li>
+          <img
+            class="swapable-img img_card"
+            src="images/poseidon.png"
+            alt="peseidon"
+          /><br />
+        </li>
+        <li>
+          <img
+            class="swapable-img img_card"
+            src="images/aphina.png"
+            alt="aphina"
+          /><br />
+        </li>
+        <li>
+          <div>
+            <img class="hidden_image img_card" src="images/gods.hidden.png" />
+
+            <img
+              class="swapable-img img_card"
+              src="images/zeus.png"
+              alt="zeus"
+            /><br />
+          </div>
+          <img
+            class="img_card"
+            id="apollon"
+            src="images/apollon.png"
+            alt="apollon"
+          />
+        </li>
+      </ul>
+      <button class="img_card button" onclick="shuffle_gods();">
+        Розмішати
+      </button>
+    </div>
+    <p></p>
+    <div>
+      <img id="footer" src="images/bottom_border.png" width="100%" alt="" />
+    </div>
+  </body>
+</html>
