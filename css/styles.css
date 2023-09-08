@@ -2,7 +2,11 @@
   list-style: none;
   margin: 0;
   padding: 0;
-  background-color: rgb(240, 240, 240);
+  background-color: aliceblue;
+}
+
+a.button_start {
+  text-decoration: none; /* Видалити підчеркування тексту */
 }
 button {
   border: none;
@@ -25,14 +29,14 @@ button {
   margin-bottom: 15px;
 }
 
-/* #main {
+#main {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   font-size: x-large;
-} */
+}
 
 #main_conf {
   display: flex;
@@ -44,11 +48,21 @@ button {
 }
 
 #main_conf_players {
-  display: block;
+  display: flex;
+  flex-direction: column;
 }
 
 #main_conf_players li {
-  margin-top: 15px;
+  margin-left: 35px;
+  background-color: #fff;
+}
+
+#main_conf_players li label {
+  background-color: #fff;
+}
+#main_conf_players ul {
+  background-color: #fff;
+  border-radius: 50%;
 }
 
 #main_cyclades {
@@ -56,21 +70,16 @@ button {
   font-size: xx-large;
 }
 
-#main_playres {
-  margin-top: 5px;
-  font-size: x-large;
-}
-
-#main li div {
+.main_title {
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
+  margin-top: 15px;
+  margin-bottom: 12px;
+  font-size: x-large;
+  background-color: #fff;
+  border-radius: 50%;
 }
 
-#gods_order {
-  display: flex;
-  flex-wrap: wrap;
-}
 .menu_container {
   margin-top: 25px;
   background-color: transparent;
@@ -79,9 +88,16 @@ button {
   align-items: center;
 }
 
-.serivce_description {
-  color: black;
+.card {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
   background-color: white;
+  border-radius: 10%;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+  align-content: center;
+  width: 200px;
 }
 
 .img_card {
@@ -93,11 +109,14 @@ button {
 }
 .hidden_image {
   position: absolute;
+  display: none;
+  width: 25%;
 }
 
 .button {
   margin-top: 20px;
   height: 80px;
+  width: 220px;
   font-weight: bold;
   border-radius: 6px;
   background: #fa9746;
@@ -105,7 +124,10 @@ button {
   font-family: Georgia, "Times New Roman", Times, serif;
   color: white;
 }
-
+.button_start {
+  display: flex;
+  justify-content: center;
+}
 #apollon {
   margin-top: 30px;
 }
@@ -118,10 +140,12 @@ input[type="radio"] {
 }
 
 .checkpoint_container {
+  background-color: #fff;
   display: inline-block;
   position: relative;
   padding-left: 35px;
   margin-right: 10px;
+  margin-bottom: 15px;
   cursor: pointer;
 }
 
@@ -171,9 +195,6 @@ input[type="checkbox"]:checked + .radio-checkmark::after {
     width: 85%;
   }
   .button {
-    width: 70%;
-  }
-  .button_start {
     width: 60%;
   }
 

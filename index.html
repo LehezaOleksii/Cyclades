@@ -10,53 +10,62 @@
   <body>
     <div id="main_conf" class="menu_container">
       <div id="main_cyclades">Cyclades</div>
-      <div id="main_playres">Кількість гравців</div>
-      <div id="main_conf_players">
+      <div id="main_conf_players" class="card">
+        <div class="main_title">Кількість гравців</div>
         <ul>
           <li>
             <label class="checkpoint_container"
               >2 гравця
-              <input type="radio" name="radio-group-players" />
+              <input type="radio" name="radio-group-players" value="4" />
               <span class="radio-checkmark"></span>
             </label>
           </li>
           <li>
             <label class="checkpoint_container"
               >3 гравці
-              <input type="radio" name="radio-group-players" />
+              <input type="radio" name="radio-group-players" value="3" />
               <span class="radio-checkmark"></span>
             </label>
           </li>
           <li>
             <label class="checkpoint_container"
               >4 гравці
-              <input type="radio" name="radio-group-players" />
+              <input type="radio" name="radio-group-players" value="4" />
               <span class="radio-checkmark"></span>
             </label>
           </li>
           <li>
             <label class="checkpoint_container"
               >5 гравців
-              <input type="radio" name="radio-group-players" />
+              <input type="radio" name="radio-group-players" value="5" />
               <span class="radio-checkmark"></span>
             </label>
           </li>
           <li>
-            <label class="checkpoint_container"
-              >6 гравців
-              <input type="radio" name="radio-group-players" />
+            <label class="checkpoint_container">
+              6 гравців
+              <input
+                id="players6"
+                type="radio"
+                name="radio-group-players"
+                value="6"
+              />
               <span class="radio-checkmark"></span>
             </label>
           </li>
-          <li></li>
         </ul>
-        <label class="checkpoint_container"
-          >Кронос
-          <input type="checkbox" />
+      </div>
+      <div class="card">
+        <div class="main_title">Кронос</div>
+        <label class="checkpoint_container">
+          Кронос
+          <input id="kronosCheckbox" type="checkbox" value="true" />
           <span class="radio-checkmark"></span>
         </label>
       </div>
-      <button class="button button_start" href="menu.html">Розпочати</button>
     </div>
+    <a class="button_start" href="#" id="startButton">
+      <button class="button">Розпочати</button>
+    </a>
   </body>
 </html>
