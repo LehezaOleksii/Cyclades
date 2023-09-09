@@ -47,16 +47,6 @@ button {
   font-size: x-large;
 }
 
-#main_conf_players {
-  display: flex;
-  flex-direction: column;
-}
-
-#main_conf_players li {
-  margin-left: 35px;
-  background-color: #fff;
-}
-
 #main_conf_players li label {
   background-color: #fff;
 }
@@ -65,9 +55,18 @@ button {
   border-radius: 50%;
 }
 
-#main_cyclades {
+#main_cyclades_title {
   color: #fa9746;
   font-size: xx-large;
+}
+
+.checkpoint_container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  background-color: white;
+  flex-wrap: wrap;
+  align-content: center;
 }
 
 .main_title {
@@ -98,6 +97,13 @@ button {
   flex-wrap: wrap;
   align-content: center;
   width: 200px;
+}
+.card ul {
+  background-color: #fff;
+}
+
+.card li {
+  background-color: #fff;
 }
 
 .img_card {
@@ -139,12 +145,11 @@ input[type="radio"] {
   display: none;
 }
 
-.checkpoint_container {
+.checkpoint_button {
   background-color: #fff;
   display: inline-block;
   position: relative;
   padding-left: 35px;
-  margin-right: 10px;
   margin-bottom: 15px;
   cursor: pointer;
 }

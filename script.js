@@ -4,30 +4,6 @@ var active_playres;
 var kronos;
 var max = 6; ////////////////////
 
-//check is players checkpoint checked
-document.addEventListener("DOMContentLoaded", function () {
-  const startButton = document.getElementById("startButton");
-  const playersRadios = document.querySelectorAll(
-    'input[name="radio-group-players"]'
-  );
-
-  function isPlayersSelected() {
-    for (const radio of playersRadios) {
-      if (radio.checked) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  startButton.addEventListener("click", function (event) {
-    if (!isPlayersSelected()) {
-      event.preventDefault();
-      alert("Будь ласка, виберіть кількість гравців перед початком.");
-    }
-  });
-});
-
 //display kronos image if checkpoint kronos checked
 document.addEventListener("DOMContentLoaded", function () {
   const urlParams = new URLSearchParams(window.location.search);
@@ -39,17 +15,53 @@ document.addEventListener("DOMContentLoaded", function () {
     kronosImage.style.display = "none";
   }
 });
-//
 
 document.addEventListener("DOMContentLoaded", function () {
   const startButton = document.getElementById("startButton");
   const playersRadios = document.querySelectorAll(
     'input[name="radio-group-players"]'
   );
+  const mapRadios = document.querySelectorAll(
+    'input[name="radio-group-map-size"]'
+  );
   const kronosCheckbox = document.getElementById("kronosImage");
+  function handleKronosChange() {
+    if (kronosCheckbox.checked) {
+      mapRadios[0].disabled = true;
+      mapRadios[1].checked = true;
+    } else {
+      mapRadios[0].disabled = false;
+    }
+  }
+
+  // Attach the handleKronosChange function to the change event of the Kronos checkbox
+  kronosCheckbox.addEventListener("change", handleKronosChange);
+
+  // Initialize Kronos behavior
+  handleKronosChange();
+});
+
+//transfer data for randomizer from config page and treatment exceptions
+document.addEventListener("DOMContentLoaded", function () {
+  const startButton = document.getElementById("startButton");
+  const playersRadios = document.querySelectorAll(
+    'input[name="radio-group-players"]'
+  );
 
   function isPlayersSelected() {
     for (const radio of playersRadios) {
+      if (radio.checked) {
+        return true;
+      }
+    }
+    return false;
+  }
+  const mapRadios = document.querySelectorAll(
+    'input[name="radio-group-map-size"]'
+  );
+
+  function isMapSizeSelected() {
+    for (const radio of mapRadios) {
       if (radio.checked) {
         return true;
       }
@@ -61,17 +73,25 @@ document.addEventListener("DOMContentLoaded", function () {
     if (!isPlayersSelected()) {
       event.preventDefault();
       alert("Будь ласка, виберіть кількість гравців перед початком.");
+    } else if (!isMapSizeSelected()) {
+      event.preventDefault();
+      alert("Будь ласка, виберіть розмір мапи перед початком.");
     } else {
       const selectedPlayers = document.querySelector(
         'input[name="radio-group-players"]:checked'
       ).value;
+      const mapSize = document.querySelector(
+        'input[name="radio-group-map-size"]:checked'
+      ).value;
+      const kronosCheckbox = document.getElementById("kronosImage");
       const kronosSelected = kronosCheckbox.checked ? "true" : "false";
-      const menuURL = `menu.html?players=${selectedPlayers}&kronos=${kronosSelected}`;
+      const menuURL = `menu.html?players=${selectedPlayers}&mapSize=${mapSize}&kronos=${kronosSelected}`;
       window.location.href = menuURL;
     }
   });
 });
 
+//shuffle alg
 function shuffle_gods() {
   const urlParams = new URLSearchParams(window.location.search);
   if (urlParams.get("players")) {
@@ -126,20 +146,20 @@ function shuffle(gods_list) {
   return gods_list;
 }
 
-function getRandomInt(min, max) {
-  const skew = 1;
-  let u = 0,
-    v = 0;
-  while (u === 0) u = Math.random();
-  while (v === 0) v = Math.random();
-  let num = Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
+// function getRandomInt(min, max) {
+//   const skew = 1;
+//   let u = 0,
+//     v = 0;
+//   while (u === 0) u = Math.random();
+//   while (v === 0) v = Math.random();
+//   let num = Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
 
-  num = num / 10.0 + 0.5;
-  if (num > 1 || num < 0) num = randn_bm(min, max, skew);
-  else {
-    num = Math.pow(num, skew);
-    num *= max - min;
-    num += min;
-  }
-  return Math.floor(num);
-}
+//   num = num / 10.0 + 0.5;
+//   if (num > 1 || num < 0) num = randn_bm(min, max, skew);
+//   else {
+//     num = Math.pow(num, skew);
+//     num *= max - min;
+//     num += min;
+//   }
+//   return Math.floor(num);
+// }
