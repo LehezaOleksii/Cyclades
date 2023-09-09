@@ -4,6 +4,7 @@ var active_playres;
 var kronos;
 var max = 6; ////////////////////
 
+//check is players checkpoint checked
 document.addEventListener("DOMContentLoaded", function () {
   const startButton = document.getElementById("startButton");
   const playersRadios = document.querySelectorAll(
@@ -27,6 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+//display kronos image if checkpoint kronos checked
 document.addEventListener("DOMContentLoaded", function () {
   const urlParams = new URLSearchParams(window.location.search);
   const kronos_url = urlParams.get("kronos");
@@ -37,49 +39,38 @@ document.addEventListener("DOMContentLoaded", function () {
     kronosImage.style.display = "none";
   }
 });
+//
 
 document.addEventListener("DOMContentLoaded", function () {
   const startButton = document.getElementById("startButton");
   const playersRadios = document.querySelectorAll(
     'input[name="radio-group-players"]'
   );
-  const kronosCheckbox = document.getElementById("kronosCheckbox");
+  const kronosCheckbox = document.getElementById("kronosImage");
 
-  function updateStartButtonUrl() {
-    let url = "menu.html?";
-    const selectedPlayers = document.querySelector(
-      'input[name="radio-group-players"]:checked'
-    );
-
-    if (selectedPlayers) {
-      url += `players=${selectedPlayers.value}`;
-      active_playres = selectedPlayers.value;
-    }
-
-    if (kronosCheckbox.checked) {
-      if (selectedPlayers) {
-        url += "&";
+  function isPlayersSelected() {
+    for (const radio of playersRadios) {
+      if (radio.checked) {
+        return true;
       }
-      url += "kronos=true";
-    } else {
-      if (selectedPlayers) {
-        url += "&";
-      }
-      url += "kronos=false";
     }
-
-    startButton.href = url;
+    return false;
   }
 
-  playersRadios.forEach(function (radio) {
-    radio.addEventListener("change", updateStartButtonUrl);
+  startButton.addEventListener("click", function (event) {
+    if (!isPlayersSelected()) {
+      event.preventDefault();
+      alert("Будь ласка, виберіть кількість гравців перед початком.");
+    } else {
+      const selectedPlayers = document.querySelector(
+        'input[name="radio-group-players"]:checked'
+      ).value;
+      const kronosSelected = kronosCheckbox.checked ? "true" : "false";
+      const menuURL = `menu.html?players=${selectedPlayers}&kronos=${kronosSelected}`;
+      window.location.href = menuURL;
+    }
   });
-
-  kronosCheckbox.addEventListener("change", updateStartButtonUrl);
-  updateStartButtonUrl();
 });
-
-
 
 function shuffle_gods() {
   const urlParams = new URLSearchParams(window.location.search);
