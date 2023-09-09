@@ -1,8 +1,8 @@
-var max_index = 3; //change
-var max_players = 6;
-var active_playres;
-var kronos;
-var max = 6; ////////////////////
+// var max_index = 3; //change
+// var max_players = 6;
+// var active_playres;
+// var kronos;
+// var max = 6; ////////////////////
 
 //display kronos image if checkpoint kronos checked
 document.addEventListener("DOMContentLoaded", function () {
@@ -15,32 +15,36 @@ document.addEventListener("DOMContentLoaded", function () {
     kronosImage.style.display = "none";
   }
 });
-
+//manage kronos and 6 map size dependency
 document.addEventListener("DOMContentLoaded", function () {
-  const startButton = document.getElementById("startButton");
-  const playersRadios = document.querySelectorAll(
-    'input[name="radio-group-players"]'
-  );
+  const kronosCheckbox = document.getElementById("kronosImage");
+  const sixPlayerRadio = document.getElementById("6 player map");
   const mapRadios = document.querySelectorAll(
     'input[name="radio-group-map-size"]'
   );
-  const kronosCheckbox = document.getElementById("kronosImage");
-  function handleKronosChange() {
+
+  // manage kronos
+  kronosCheckbox.addEventListener("change", function () {
     if (kronosCheckbox.checked) {
-      mapRadios[0].disabled = true;
-      mapRadios[1].checked = true;
+      sixPlayerRadio.checked = true;
     } else {
-      mapRadios[0].disabled = false;
+      sixPlayerRadio.checked = false;
     }
-  }
+  });
 
-  // Attach the handleKronosChange function to the change event of the Kronos checkbox
-  kronosCheckbox.addEventListener("change", handleKronosChange);
-
-  // Initialize Kronos behavior
-  handleKronosChange();
+  // mange map size
+  mapRadios.forEach((radio) => {
+    radio.addEventListener("change", function () {
+      if (radio.value === "6") {
+        if (!kronosCheckbox.checked) {
+          kronosCheckbox.checked = true;
+        }
+      } else if (radio.value !== "6" && !sixPlayerRadio.checked) {
+        kronosCheckbox.checked = false;
+      }
+    });
+  });
 });
-
 //transfer data for randomizer from config page and treatment exceptions
 document.addEventListener("DOMContentLoaded", function () {
   const startButton = document.getElementById("startButton");
@@ -93,30 +97,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
 //shuffle alg
 function shuffle_gods() {
-  const urlParams = new URLSearchParams(window.location.search);
-  if (urlParams.get("players")) {
-    active_playres = urlParams.get("players");
-  }
-
-  kronos = urlParams.get("kronos");
-  if (kronos === true) {
-    max_players = 6;
-  } else {
-    max_players = 5;
-  }
   let gods_images = get_list_gods();
   shuffle(gods_images);
 }
 
 function get_list_gods() {
   return document
-    .getElementById("Gods_order")
+    .getElementById("gods_order")
     .getElementsByClassName("swapable-img");
 }
 
 function shuffle(gods_list) {
+  const urlParams = new URLSearchParams(window.location.search);
+  active_playres = urlParams.get("players");
+  max_players = urlParams.get("mapSize");
   let currentIndex = 0;
   let randomIndex;
+  let max_index = active_playres - 1;
   swipe_number = max_players - active_playres;
 
   if (swipe_number > 0) {
@@ -132,11 +129,12 @@ function shuffle(gods_list) {
       swipe_number--;
     }
   }
+
   let before_shuffle_currentIndex = currentIndex;
-  for (var i = 0; i < 500; i++) {
+  for (var i = 0; i < 20; i++) {
     currentIndex = before_shuffle_currentIndex;
     while (currentIndex < max_index) {
-      randomIndex = getRandomInt(currentIndex, max_index + 1);
+      randomIndex = randomIntFromInterval(currentIndex, max_index);
       var tempSrc = gods_list[currentIndex].src;
       gods_list[currentIndex].src = gods_list[randomIndex].src;
       gods_list[randomIndex].src = tempSrc;
@@ -146,20 +144,7 @@ function shuffle(gods_list) {
   return gods_list;
 }
 
-// function getRandomInt(min, max) {
-//   const skew = 1;
-//   let u = 0,
-//     v = 0;
-//   while (u === 0) u = Math.random();
-//   while (v === 0) v = Math.random();
-//   let num = Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
-
-//   num = num / 10.0 + 0.5;
-//   if (num > 1 || num < 0) num = randn_bm(min, max, skew);
-//   else {
-//     num = Math.pow(num, skew);
-//     num *= max - min;
-//     num += min;
-//   }
-//   return Math.floor(num);
-// }
+function randomIntFromInterval(min, max) {
+  // min and max included
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
