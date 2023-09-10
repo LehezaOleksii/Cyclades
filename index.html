@@ -3,62 +3,108 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cyclades randomizer</title>
     <link rel="stylesheet" href="css/styles.css" />
+    <title>Cyclades config</title>
     <script src="script.js"></script>
   </head>
   <body>
-    <div id="head">
-      <img id="head" src="images/head_border.png" width="100%" alt="" />
+    <div id="main_conf" class="menu_container">
+      <div id="main_cyclades_title">Cyclades</div>
+      <div class="card">
+        <div class="main_title">Кількість гравців</div>
+        <ul class="checkpoint_container">
+          <li>
+            <label class="checkpoint_button"
+              >2 гравця
+              <input
+                id="2 player"
+                type="radio"
+                name="radio-group-players"
+                value="4"
+              />
+              <span class="radio-checkmark"></span>
+            </label>
+          </li>
+          <li>
+            <label class="checkpoint_button"
+              >3 гравці
+              <input
+                id="3 player"
+                type="radio"
+                name="radio-group-players"
+                value="3"
+              />
+              <span class="radio-checkmark"></span>
+            </label>
+          </li>
+          <li>
+            <label class="checkpoint_button"
+              >4 гравці
+              <input type="radio" name="radio-group-players" value="4" />
+              <span class="radio-checkmark"></span>
+            </label>
+          </li>
+          <li>
+            <label class="checkpoint_button"
+              >5 гравців
+              <input type="radio" name="radio-group-players" value="5" />
+              <span class="radio-checkmark"></span>
+            </label>
+          </li>
+          <li>
+            <label class="checkpoint_button">
+              6 гравців
+              <input
+                id="6 player"
+                type="radio"
+                name="radio-group-players"
+                value="6"
+              />
+              <span class="radio-checkmark"></span>
+            </label>
+          </li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="main_title">Мапа</div>
+        <ul class="checkpoint_container">
+          <li>
+            <label class="checkpoint_button">
+              5 гравців
+              <input
+                id="5 map size"
+                type="radio"
+                name="radio-group-map-size"
+                value="5"
+              />
+              <span class="radio-checkmark"></span>
+            </label>
+          </li>
+          <li>
+            <label class="checkpoint_button">
+              6 гравців
+              <input
+                id="6 map size"
+                type="radio"
+                name="radio-group-map-size"
+                value="6"
+              />
+              <span class="radio-checkmark"></span>
+            </label>
+          </li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="main_title">Кронос</div>
+        <label class="checkpoint_button">
+          Кронос
+          <input id="kronosImage" type="checkbox" value="true" />
+          <span class="radio-checkmark"></span>
+        </label>
+      </div>
     </div>
-    <div id="main">
-      <ul id="Gods_order">
-        <li>
-          <img
-            class="swapable-img img_card"
-            src="images/ares.png"
-            alt="ares"
-          /><br />
-        </li>
-        <li>
-          <img
-            class="swapable-img img_card"
-            src="images/poseidon.png"
-            alt="peseidon"
-          /><br />
-        </li>
-        <li>
-          <img
-            class="swapable-img img_card"
-            src="images/aphina.png"
-            alt="aphina"
-          /><br />
-        </li>
-        <li>
-          <div>
-            <img class="hidden_image img_card" src="images/gods.hidden.png" />
-
-            <img
-              class="swapable-img img_card"
-              src="images/zeus.png"
-              alt="zeus"
-            /><br />
-          </div>
-          <img
-            class="img_card"
-            id="apollon"
-            src="images/apollon.png"
-            alt="apollon"
-          />
-        </li>
-      </ul>
-      <button class="img_card button" onclick="shuffle_gods();">
-        Розмішати
-      </button>
-    </div>
-    <p></p>
-    <div>
-      <img id="footer" src="images/bottom_border.png" width="100%" alt="" />
-    </div>
+    <a class="button_start" href="#" id="startButton">
+      <button class="button">Розпочати</button>
+    </a>
   </body>
 </html>

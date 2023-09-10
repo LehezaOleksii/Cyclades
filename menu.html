@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cyclades randomizer</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <script src="script.js"></script>
+  </head>
+  <body>
+    <div id="head">
+      <img id="head" src="images/head_border.png" width="100%" alt="" />
+    </div>
+    <div id="main">
+      <ul id="gods_order">
+        <li>
+          <img class="swapable-img img_card" src="images/ares.png" alt="ares" />
+        </li>
+        <li>
+          <img
+            class="swapable-img img_card"
+            src="images/poseidon.png"
+            alt="peseidon"
+          />
+        </li>
+        <li>
+          <img
+            id="hidden_god_3"
+            class="hidden_image img_card"
+            src="images/gods.hidden.png"
+          />
+          <img
+            class="swapable-img img_card"
+            src="images/aphina.png"
+            alt="aphina"
+          />
+        </li>
+        <li>
+          <img
+            id="hidden_god_2"
+            class="hidden_image img_card"
+            src="images/gods.hidden.png"
+          />
+          <img class="swapable-img img_card" src="images/zeus.png" alt="zeus" />
+        </li>
+        <li>
+          <img
+            id="hidden_god_1"
+            class="hidden_image img_card"
+            src="images/gods.hidden.png"
+          />
+          <img
+            id="kronosImage"
+            class="swapable-img img_card"
+            src="images/Kronos.png"
+            alt="Kronos"
+          />
+        </li>
+        <div>
+          <img
+            class="img_card"
+            id="apollon"
+            src="images/apollon.png"
+            alt="apollon"
+          />
+        </div>
+      </ul>
+
+      <button class="img_card button" onclick="shuffle_gods();">
+        Розмішати
+      </button>
+    </div>
+    <img id="footer" src="images/bottom_border.png" width="100%" alt="" />
+  </body>
+</html>
