@@ -15,20 +15,34 @@ document.addEventListener("DOMContentLoaded", function () {
     kronosImage.style.display = "none";
   }
 });
+
 //manage kronos and 6 map size dependency
 document.addEventListener("DOMContentLoaded", function () {
   const kronosCheckbox = document.getElementById("kronosImage");
-  const sixPlayerRadio = document.getElementById("6 player map");
+  const sixPlayerMapRadio = document.getElementById("6 map size");
+  const fivePlayerMapRadio = document.getElementById("5 map size");
+  const sixPlayersRadio = document.getElementById("6 player");
+  const secondPlayersRadio = document.getElementById("2 player");
+  const thirdPlayersRadio = document.getElementById("3 player");
+
   const mapRadios = document.querySelectorAll(
     'input[name="radio-group-map-size"]'
   );
-
+  const playersRadios = document.querySelectorAll(
+    'input[name="radio-group-players"]'
+  );
   // manage kronos
   kronosCheckbox.addEventListener("change", function () {
     if (kronosCheckbox.checked) {
-      sixPlayerRadio.checked = true;
+      sixPlayerMapRadio.checked = true;
+      secondPlayersRadio.disabled = true;
+      if (secondPlayersRadio.checked) {
+        thirdPlayersRadio.checked = true;
+      }
     } else {
-      sixPlayerRadio.checked = false;
+      fivePlayerMapRadio.checked = true;
+      sixPlayersRadio.checked = false;
+      secondPlayersRadio.disabled = false;
     }
   });
 
@@ -38,13 +52,33 @@ document.addEventListener("DOMContentLoaded", function () {
       if (radio.value === "6") {
         if (!kronosCheckbox.checked) {
           kronosCheckbox.checked = true;
+          sixPlayersRadio.checked = true;
+          secondPlayersRadio.disabled = true;
         }
-      } else if (radio.value !== "6" && !sixPlayerRadio.checked) {
+      } else if (radio.value !== "6" && !sixPlayerMapRadio.checked) {
         kronosCheckbox.checked = false;
+        sixPlayersRadio.checked = false;
+        secondPlayersRadio.disabled = false;
+      }
+    });
+  });
+
+  // mange player amount
+  playersRadios.forEach((radio) => {
+    radio.addEventListener("change", function () {
+      if (radio.value === "6") {
+        if (!kronosCheckbox.checked) {
+          kronosCheckbox.checked = true;
+          secondPlayersRadio.disabled = true;
+        } else if (kronosCheckbox.checked === false) {
+          secondPlayersRadio.disabled = false;
+        }
+        sixPlayerMapRadio.checked = true;
       }
     });
   });
 });
+
 //transfer data for randomizer from config page and treatment exceptions
 document.addEventListener("DOMContentLoaded", function () {
   const startButton = document.getElementById("startButton");
@@ -93,6 +127,36 @@ document.addEventListener("DOMContentLoaded", function () {
       window.location.href = menuURL;
     }
   });
+});
+
+//displqy hidden gods
+document.addEventListener("DOMContentLoaded", function () {
+  function getURLParameter(name) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(name);
+  }
+
+  const mapSize = parseInt(getURLParameter("mapSize"));
+  const players = parseInt(getURLParameter("players"));
+
+  const hiddenGod1 = document.getElementById("hidden_god_1");
+  const hiddenGod2 = document.getElementById("hidden_god_2");
+  const hiddenGod3 = document.getElementById("hidden_god_3");
+
+  function updateHiddenElements() {
+    const urlParams = new URLSearchParams(window.location.href);
+    const kronos_url = urlParams.get("kronos");
+    const hiddenElementsToShow = mapSize - players;
+    if (kronos_url === "true") {
+      hiddenGod1.style.display = hiddenElementsToShow >= 1 ? "block" : "none";
+      hiddenGod2.style.display = hiddenElementsToShow >= 2 ? "block" : "none";
+      hiddenGod3.style.display = hiddenElementsToShow >= 3 ? "block" : "none";
+    } else {
+      hiddenGod2.style.display = hiddenElementsToShow >= 1 ? "block" : "none";
+      hiddenGod3.style.display = hiddenElementsToShow >= 2 ? "block" : "none";
+    }
+  }
+  updateHiddenElements();
 });
 
 //shuffle alg
