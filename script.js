@@ -40,9 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
   player2Radio.addEventListener("change", function () {
     if (!canSelectPlayer2()) {
       player2Radio.checked = false;
-      alert(
-        "Ви не можете обрати гру на двох при увімкненому режимі 'Кронос'"
-      );
+      alert("Ви не можете обрати гру на двох при увімкненому режимі 'Кронос'");
     }
   });
 
@@ -217,20 +215,32 @@ function shuffle(gods_list) {
   }
 
   let before_shuffle_currentIndex = currentIndex;
-  for (var i = 0; i < 20; i++) {
+  for (var i = 0; i < 100; i++) {
     currentIndex = before_shuffle_currentIndex;
     while (currentIndex < max_index) {
-      randomIndex = randomIntFromInterval(currentIndex, max_index);
+      randomIndex = randomIntFromInterval(swipe_number, max_index);
       var tempSrc = gods_list[currentIndex].src;
       gods_list[currentIndex].src = gods_list[randomIndex].src;
       gods_list[randomIndex].src = tempSrc;
       currentIndex++;
     }
   }
+
+  let minIndex = swipe_number;
+
+  for (var i = 0; i < 100; i++) {
+    let last_player = max_players;
+    while (max_players > minIndex) {
+      randomIndex = randomIntFromInterval(minIndex, max_index);
+      var tempSrc = gods_list[last_player].src;
+      gods_list[last_player].src = gods_list[randomIndex].src;
+      gods_list[randomIndex].src = tempSrc;
+      last_player--;
+    }
+  }
   return gods_list;
 }
 
 function randomIntFromInterval(min, max) {
-  // min and max included
   return Math.floor(Math.random() * (max - min + 1) + min);
 }

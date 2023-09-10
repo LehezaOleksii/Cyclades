@@ -108,7 +108,8 @@ button {
 
 .img_card {
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
-  width: 30%;
+  width: 35%;
+  margin-top: 20px;
 }
 .img_card:hover {
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
@@ -119,11 +120,10 @@ button {
 }
 #gods_order li {
   display: flex;
-  justify-content: center;
-  margin-top: 20px;
+  justify-content: center; 
 }
 #gods_order div {
-  display: flex; 
+  display: flex;
   justify-content: center;
 }
 
@@ -213,13 +213,6 @@ input[type="checkbox"]:checked + .radio-checkmark::after {
   .img_card {
     width: 90%;
   }
-
-  /* #gods_order li {
-    margin-top: 10px;
-  }
-  #gods_order div {
-    margin-top: 10px;
-  } */
 }
 
 @media screen and (max-width: 900px) and (max-height: 500px) {
@@ -229,11 +222,4 @@ input[type="checkbox"]:checked + .radio-checkmark::after {
   .button {
     width: 70%;
   }
-
-  /* #gods_order li {
-    margin-top: 10px;
-  }
-  #gods_order div {
-    margin-top: 10px;
-  } */
 }
