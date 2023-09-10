@@ -22,8 +22,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const sixPlayerMapRadio = document.getElementById("6 map size");
   const fivePlayerMapRadio = document.getElementById("5 map size");
   const sixPlayersRadio = document.getElementById("6 player");
-  const secondPlayersRadio = document.getElementById("2 player");
-  const thirdPlayersRadio = document.getElementById("3 player");
+  const player2Radio = document.getElementById("2 player");
+  const player3Radio = document.getElementById("3 player");
 
   const mapRadios = document.querySelectorAll(
     'input[name="radio-group-map-size"]'
@@ -31,18 +31,40 @@ document.addEventListener("DOMContentLoaded", function () {
   const playersRadios = document.querySelectorAll(
     'input[name="radio-group-players"]'
   );
+
+  //block game for 2 players if kronos checked
+  function canSelectPlayer2() {
+    return !kronosCheckbox.checked;
+  }
+
+  player2Radio.addEventListener("change", function () {
+    if (!canSelectPlayer2()) {
+      player2Radio.checked = false;
+      alert(
+        "Ви не можете обрати гру на двох при увімкненому режимі 'Кронос'"
+      );
+    }
+  });
+
+  kronosCheckbox.addEventListener("change", function () {
+    if (kronosCheckbox.checked) {
+      player2Radio.disabled = true;
+    } else {
+      player2Radio.disabled = false;
+    }
+  });
   // manage kronos
   kronosCheckbox.addEventListener("change", function () {
     if (kronosCheckbox.checked) {
       sixPlayerMapRadio.checked = true;
-      secondPlayersRadio.disabled = true;
-      if (secondPlayersRadio.checked) {
-        thirdPlayersRadio.checked = true;
+      player2Radio.disabled = true;
+      if (player2Radio.checked) {
+        player3Radio.checked = true;
       }
     } else {
       fivePlayerMapRadio.checked = true;
       sixPlayersRadio.checked = false;
-      secondPlayersRadio.disabled = false;
+      player2Radio.disabled = false;
     }
   });
 
@@ -53,12 +75,12 @@ document.addEventListener("DOMContentLoaded", function () {
         if (!kronosCheckbox.checked) {
           kronosCheckbox.checked = true;
           sixPlayersRadio.checked = true;
-          secondPlayersRadio.disabled = true;
+          player2Radio.disabled = true;
         }
       } else if (radio.value !== "6" && !sixPlayerMapRadio.checked) {
         kronosCheckbox.checked = false;
         sixPlayersRadio.checked = false;
-        secondPlayersRadio.disabled = false;
+        player2Radio.disabled = false;
       }
     });
   });
@@ -69,9 +91,9 @@ document.addEventListener("DOMContentLoaded", function () {
       if (radio.value === "6") {
         if (!kronosCheckbox.checked) {
           kronosCheckbox.checked = true;
-          secondPlayersRadio.disabled = true;
+          player2Radio.disabled = true;
         } else if (kronosCheckbox.checked === false) {
-          secondPlayersRadio.disabled = false;
+          player2Radio.disabled = false;
         }
         sixPlayerMapRadio.checked = true;
       }

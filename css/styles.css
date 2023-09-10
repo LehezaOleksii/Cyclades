@@ -123,8 +123,7 @@ button {
   margin-top: 20px;
 }
 #gods_order div {
-  display: flex;
-  margin-top: 20px;
+  display: flex; 
   justify-content: center;
 }
 
