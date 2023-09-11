@@ -239,11 +239,15 @@ function shuffle(gods_list) {
     currentIndex = before_shuffle_currentIndex;
 
     while (currentIndex <= max_index) {
-      randomIndex = randomIntFromInterval(
-        swipe_number_before,
-        max_index,
-        currentIndex
-      );
+      if (active_playres !== "3") {
+        randomIndex = randomIntFromInterval(
+          swipe_number_before,
+          max_index,
+          currentIndex
+        );
+      } else {
+        randomIndex = randomIntFromInterval(swipe_number_before, max_index);
+      }
       var tempSrc = gods_list[currentIndex].src;
       gods_list[currentIndex].src = gods_list[randomIndex].src;
       gods_list[randomIndex].src = tempSrc;
@@ -253,11 +257,15 @@ function shuffle(gods_list) {
     currentIndex = before_shuffle_currentIndex;
     let max_index_shuffle = max_index;
     while (currentIndex <= max_index) {
-      randomIndex = randomIntFromInterval(
-        swipe_number_before,
-        max_index,
-        max_index_shuffle
-      );
+      if (active_playres !== "3") {
+        randomIndex = randomIntFromInterval(
+          swipe_number_before,
+          max_index,
+          currentIndex
+        );
+      } else {
+        randomIndex = randomIntFromInterval(swipe_number_before, max_index);
+      }
       var tempSrc = gods_list[max_index_shuffle].src;
       gods_list[max_index_shuffle].src = gods_list[randomIndex].src;
       gods_list[randomIndex].src = tempSrc;
@@ -270,9 +278,17 @@ function shuffle(gods_list) {
     } else {
       kronos = 1;
     }
-    for (let index = swipe_number; index < gods_list.length - kronos; index++) {
-      if (before_change_gods_list[index] === current_gods_list[index]) {
-        max_recurring_god++;
+    if (active_playres === "3") {
+      max_recurring_god = 0;
+    } else {
+      for (
+        let index = swipe_number;
+        index < gods_list.length - kronos;
+        index++
+      ) {
+        if (before_change_gods_list[index] === current_gods_list[index]) {
+          max_recurring_god++;
+        }
       }
     }
   }
@@ -284,4 +300,8 @@ function randomIntFromInterval(min, max, current_number) {
     randmoNumber = Math.floor(Math.random() * (max - min + 1) + min);
   }
   return randmoNumber;
+}
+
+function randomIntFromInterval(min, max) {
+  return (randmoNumber = Math.floor(Math.random() * (max - min + 1) + min));
 }
