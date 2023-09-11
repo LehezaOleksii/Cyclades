@@ -120,7 +120,7 @@ button {
 }
 #gods_order li {
   display: flex;
-  justify-content: center; 
+  justify-content: center;
 }
 #gods_order div {
   display: flex;
@@ -220,6 +220,7 @@ input[type="checkbox"]:checked + .radio-checkmark::after {
     width: 80%;
   }
   .button {
-    width: 70%;
+    width: 80%;
+    height: 90px;
   }
 }
