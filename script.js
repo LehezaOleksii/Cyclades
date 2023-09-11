@@ -71,6 +71,8 @@ document.addEventListener("DOMContentLoaded", function () {
     radio.addEventListener("change", function () {
       if (radio.value === "6") {
         if (!kronosCheckbox.checked) {
+          player2Radio.checked = false;
+          player3Radio.checked = true;
           kronosCheckbox.checked = true;
           player2Radio.disabled = true;
         }
