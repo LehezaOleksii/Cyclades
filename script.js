@@ -72,7 +72,6 @@ document.addEventListener("DOMContentLoaded", function () {
       if (radio.value === "6") {
         if (!kronosCheckbox.checked) {
           kronosCheckbox.checked = true;
-          sixPlayersRadio.checked = true;
           player2Radio.disabled = true;
         }
       } else if (radio.value !== "6" && !sixPlayerMapRadio.checked) {
@@ -191,15 +190,28 @@ function get_list_gods() {
     .getElementsByClassName("swapable-img");
 }
 
+function get_current_list_gods() {
+  const godElements = document.getElementsByClassName("swapable-img");
+  const godSrcList = [];
+
+  for (let i = 0; i < godElements.length; i++) {
+    godSrcList.push(godElements[i].src);
+  }
+
+  return godSrcList;
+}
+
 function shuffle(gods_list) {
   const urlParams = new URLSearchParams(window.location.search);
   active_playres = urlParams.get("players");
   max_players = urlParams.get("mapSize");
   let currentIndex = 0;
   let randomIndex;
-  let max_index = active_playres - 1;
+  let kronos_url = urlParams.get("kronos");
+  let kronos;
+  let max_index = max_players - 2;
   swipe_number = max_players - active_playres;
-
+  let swipe_number_before = swipe_number;
   if (swipe_number > 0) {
     currentIndex += swipe_number;
     let swipe_god_index = 0;
@@ -213,34 +225,63 @@ function shuffle(gods_list) {
       swipe_number--;
     }
   }
+  if (active_playres === "3") {
+    swipe_number--;
+  }
+  swipe_number = swipe_number_before;
+
+  const before_change_gods_list = get_current_list_gods();
 
   let before_shuffle_currentIndex = currentIndex;
-  for (var i = 0; i < 100; i++) {
+  let max_recurring_god = 1;
+  while (max_recurring_god > 0) {
+    max_recurring_god = 0;
     currentIndex = before_shuffle_currentIndex;
-    while (currentIndex < max_index) {
-      randomIndex = randomIntFromInterval(swipe_number, max_index);
+
+    while (currentIndex <= max_index) {
+      randomIndex = randomIntFromInterval(
+        swipe_number_before,
+        max_index,
+        currentIndex
+      );
       var tempSrc = gods_list[currentIndex].src;
       gods_list[currentIndex].src = gods_list[randomIndex].src;
       gods_list[randomIndex].src = tempSrc;
       currentIndex++;
     }
-  }
 
-  let minIndex = swipe_number;
-
-  for (var i = 0; i < 100; i++) {
-    let last_player = max_players;
-    while (max_players > minIndex) {
-      randomIndex = randomIntFromInterval(minIndex, max_index);
-      var tempSrc = gods_list[last_player].src;
-      gods_list[last_player].src = gods_list[randomIndex].src;
+    currentIndex = before_shuffle_currentIndex;
+    let max_index_shuffle = max_index;
+    while (currentIndex <= max_index) {
+      randomIndex = randomIntFromInterval(
+        swipe_number_before,
+        max_index,
+        max_index_shuffle
+      );
+      var tempSrc = gods_list[max_index_shuffle].src;
+      gods_list[max_index_shuffle].src = gods_list[randomIndex].src;
       gods_list[randomIndex].src = tempSrc;
-      last_player--;
+      currentIndex++;
+      max_index_shuffle--;
+    }
+    const current_gods_list = get_current_list_gods();
+    if (kronos_url === "true") {
+      kronos = 0;
+    } else {
+      kronos = 1;
+    }
+    for (let index = swipe_number; index < gods_list.length - kronos; index++) {
+      if (before_change_gods_list[index] === current_gods_list[index]) {
+        max_recurring_god++;
+      }
     }
   }
-  return gods_list;
 }
 
-function randomIntFromInterval(min, max) {
-  return Math.floor(Math.random() * (max - min + 1) + min);
+function randomIntFromInterval(min, max, current_number) {
+  let randmoNumber = Math.floor(Math.random() * (max - min + 1) + min);
+  while (randmoNumber === current_number) {
+    randmoNumber = Math.floor(Math.random() * (max - min + 1) + min);
+  }
+  return randmoNumber;
 }
