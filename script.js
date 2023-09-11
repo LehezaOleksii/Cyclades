@@ -225,11 +225,11 @@ function shuffle(gods_list) {
       swipe_number--;
     }
   }
-  if (active_playres === "3") {
-    swipe_number--;
-  }
-  swipe_number = swipe_number_before;
 
+  swipe_number = swipe_number_before;
+  if (active_playres === "3" && max_players === "6") {
+    currentIndex = 2;
+  }
   const before_change_gods_list = get_current_list_gods();
 
   let before_shuffle_currentIndex = currentIndex;
